@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/navBarColor"
+    tools:context=".examsPop">
+
+    <TextView
+        android:id="@+id/examsName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/class_name"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/examsTime"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.32" />
+
+    <EditText
+        android:id="@+id/examsNameInput"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:ems="12"
+        android:inputType="text"
+        android:text=""
+        android:autofillHints="Class Name"
+        app:layout_constraintEnd_toEndOf="@+id/examsName"
+        app:layout_constraintStart_toStartOf="@+id/examsName"
+        app:layout_constraintTop_toBottomOf="@+id/examsName" />
+
+    <TextView
+        android:id="@+id/examsTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/class_time"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.32" />
+
+    <EditText
+        android:id="@+id/examsTimeInput"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:ems="12"
+        android:inputType="text"
+        android:text=""
+        android:autofillHints="Class Time"
+        app:layout_constraintEnd_toEndOf="@+id/examsTime"
+        app:layout_constraintStart_toStartOf="@+id/examsTime"
+        app:layout_constraintTop_toBottomOf="@+id/examsTime" />
+
+    <TextView
+        android:id="@+id/examsLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/class_instructor"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/examsTime"
+        app:layout_constraintVertical_bias="0.32" />
+
+    <EditText
+        android:id="@+id/examsLocationInput"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:ems="12"
+        android:inputType="text"
+        android:text=""
+        android:autofillHints="Class Instructor"
+        app:layout_constraintEnd_toEndOf="@+id/examsLocation"
+        app:layout_constraintStart_toStartOf="@+id/examsLocation"
+        app:layout_constraintTop_toBottomOf="@+id/examsLocation" />
+
+    <Button
+        android:id="@+id/classes_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/examsLocationInput" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
