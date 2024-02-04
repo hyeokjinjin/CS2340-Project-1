@@ -15,18 +15,17 @@ import java.util.ArrayList;
 
 public class examsPop extends Activity {
 
-    Button btn_close;
-    ArrayList<String> textInput = new ArrayList<>(3);
-    EditText examName;
-    EditText examDate;
-    EditText examLocation;
+    private ArrayList<String> textInput = new ArrayList<>(3);
+    private EditText examName;
+    private EditText examDate;
+    private EditText examLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exams_pop);
 
-        btn_close = (Button) findViewById(R.id.exam_close);
+        Button btn_close = (Button) findViewById(R.id.exam_close);
         examName = (EditText) findViewById(R.id.examNameInput);
         examDate = (EditText) findViewById(R.id.examDateTimeInput);
         examLocation = (EditText) findViewById(R.id.examLocationInput);

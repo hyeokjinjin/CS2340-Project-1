@@ -14,18 +14,17 @@ import java.util.ArrayList;
 
 public class assignmentsPop extends Activity {
 
-    Button btn_close;
-    ArrayList<String> textInput = new ArrayList<>(3);
-    EditText assignmentName;
-    EditText assignmentDueDate;
-    EditText assignmentClass;
+    private ArrayList<String> textInput = new ArrayList<>(3);
+    private EditText assignmentName;
+    private EditText assignmentDueDate;
+    private EditText assignmentClass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assignments_pop);
 
-        btn_close = (Button) findViewById(R.id.assignments_close);
+        Button btn_close = (Button) findViewById(R.id.assignments_close);
         assignmentName = (EditText) findViewById(R.id.assignmentsNameInput);
         assignmentDueDate = (EditText) findViewById(R.id.assignmentsDateInput);
         assignmentClass = (EditText) findViewById(R.id.assignmentsClassInput);

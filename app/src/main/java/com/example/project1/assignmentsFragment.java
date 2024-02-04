@@ -12,28 +12,30 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import org.w3c.dom.Text;
-
-import java.lang.reflect.Array;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class assignmentsFragment extends Fragment implements RecyclerViewInterface {
 
     private ArrayList<String> inputArray;
-    private ArrayList<ListDataClass> rowData = new ArrayList<>();
-    RecyclerView recyclerView;
-    RecyclerViewAdapter adapter;
+    private ArrayList<ListDataClass> rowData;
+    private RecyclerViewAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_assignments, container, false);
 
-        recyclerView = view.findViewById(R.id.assignments_recycler_view);
+        RecyclerView recyclerView = view.findViewById(R.id.assignments_recycler_view);
+        readItems();
         adapter = new RecyclerViewAdapter(getActivity(), rowData, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -59,6 +61,7 @@ public class assignmentsFragment extends Fragment implements RecyclerViewInterfa
                 inputArray = data.getStringArrayListExtra("Assignments Array");
                 rowData.add(new ListDataClass(inputArray.get(0), inputArray.get(1), inputArray.get(2)));
                 adapter.notifyItemInserted(adapter.getItemCount());
+                writeItem();
              }
         }
     }
@@ -66,6 +69,31 @@ public class assignmentsFragment extends Fragment implements RecyclerViewInterfa
     @Override
     public void onItemLongClick(int position) {
         rowData.remove(position);
+        writeItem();
         adapter.notifyItemRemoved(position);
     }
+
+    private void readItems() {
+        File filesDir = requireContext().getFilesDir();
+        File assignmentsFile = new File(filesDir, "assignments.bin");
+        try (FileInputStream fis = new FileInputStream(assignmentsFile);
+            ObjectInputStream ois = new ObjectInputStream(fis)) {
+            rowData = (ArrayList<ListDataClass>) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            rowData = new ArrayList<>();
+        }
+    }
+
+    private void writeItem() {
+        File filesDir = requireContext().getFilesDir();
+        File assignmentsFile = new File(filesDir, "assignments.bin");
+        try (FileOutputStream fos = new FileOutputStream(assignmentsFile);
+             ObjectOutputStream oos = new ObjectOutputStream(fos)){
+            oos.writeObject(rowData);
+            oos.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

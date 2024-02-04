@@ -1,6 +1,8 @@
 package com.example.project1;
 
-public class ListDataClass {
+import java.io.Serializable;
+
+public class ListDataClass implements Serializable {
     private String heading;
     private String subhead1;
     private String subhead2;

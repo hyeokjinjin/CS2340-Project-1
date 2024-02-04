@@ -15,18 +15,17 @@ import java.util.ArrayList;
 
 public class classesPop extends Activity {
 
-    Button btn_close;
-    ArrayList<String> textInput = new ArrayList<>(3);
-    EditText className;
-    EditText classTime;
-    EditText classInstructor;
+    private ArrayList<String> textInput = new ArrayList<>(3);
+    private EditText className;
+    private EditText classTime;
+    private EditText classInstructor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_classes_pop);
 
-        btn_close = (Button) findViewById(R.id.class_close);
+        Button btn_close = (Button) findViewById(R.id.class_close);
         className = (EditText) findViewById(R.id.classNameInput);
         classTime = (EditText) findViewById(R.id.classTimeInput);
         classInstructor = (EditText) findViewById(R.id.classInstructorInput);

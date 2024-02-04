@@ -2,6 +2,7 @@ package com.example.project1;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -12,12 +13,8 @@ import android.widget.ListView;
 
 import com.example.project1.databinding.FragmentTodoBinding;
 
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import org.apache.commons.io.FileUtils;
@@ -26,18 +23,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import com.example.project1.databinding.ActivityMainBinding;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-
 public class todoFragment extends Fragment {
     private ArrayList<String> items;
     private ArrayAdapter<String> itemsAdapter;
     private ListView lvItems;
     private FragmentTodoBinding binding;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentTodoBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
@@ -81,8 +73,7 @@ public class todoFragment extends Fragment {
 //        return view;
 //    }
 
-    //Next two blocks of code cache the data by reading and writing to/from memory
-// Next two blocks of code cache the data by reading and writing to/from memory
+    // Next two blocks of code cache the data by reading and writing to/from memory
     private void readItems() {
         File filesDir = requireContext().getFilesDir();
         File todoFile = new File(filesDir, "todo.txt");

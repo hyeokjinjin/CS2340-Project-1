@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".todoFragment">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".FirstFragment">
@@ -17,7 +16,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/lv_to_do"
             android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_above="@+id/button_addItem" />
 
@@ -26,10 +24,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/et_add_item"
             android:layout_alignTop="@+id/button_addItem"
-            android:hint="Enter a new item"
-            android:layout_alignParentLeft="true"
+            android:hint="Enter a new task"
             android:layout_alignParentStart="true"
-            android:layout_toLeftOf="@+id/button_addItem"
             android:layout_toStartOf="@+id/button_addItem"
             android:layout_alignParentBottom="true" />
 
@@ -37,11 +33,10 @@
             android:id="@+id/button_addItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Save"
+            android:text="@string/button_save"
             android:textColor="@color/black"
             android:backgroundTint="@color/cloudWisp"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -14,23 +14,28 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class examFragment extends Fragment implements RecyclerViewInterface {
 
     private ArrayList<String> inputArray;
     private ArrayList<ListDataClass> rowData = new ArrayList<>();
-    RecyclerView recyclerView;
-    RecyclerViewAdapter adapter;
+    private RecyclerViewAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_exam, container, false);
 
-        recyclerView = view.findViewById(R.id.exams_recycler_view);
+        RecyclerView recyclerView = view.findViewById(R.id.exams_recycler_view);
+        readItems();
         adapter = new RecyclerViewAdapter(getActivity(), rowData, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -56,6 +61,7 @@ public class examFragment extends Fragment implements RecyclerViewInterface {
                 inputArray = data.getStringArrayListExtra("Exams Array");
                 rowData.add(new ListDataClass(inputArray.get(0), inputArray.get(1), inputArray.get(2)));
                 adapter.notifyItemInserted(adapter.getItemCount());
+                writeItem();
             }
         }
     }
@@ -63,6 +69,31 @@ public class examFragment extends Fragment implements RecyclerViewInterface {
     @Override
     public void onItemLongClick(int position) {
         rowData.remove(position);
+        writeItem();
         adapter.notifyItemRemoved(position);
     }
+
+    private void readItems() {
+        File filesDir = requireContext().getFilesDir();
+        File assignmentsFile = new File(filesDir, "exams.bin");
+        try (FileInputStream fis = new FileInputStream(assignmentsFile);
+             ObjectInputStream ois = new ObjectInputStream(fis)) {
+            rowData = (ArrayList<ListDataClass>) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            rowData = new ArrayList<>();
+        }
+    }
+
+    private void writeItem() {
+        File filesDir = requireContext().getFilesDir();
+        File assignmentsFile = new File(filesDir, "exams.bin");
+        try (FileOutputStream fos = new FileOutputStream(assignmentsFile);
+             ObjectOutputStream oos = new ObjectOutputStream(fos)){
+            oos.writeObject(rowData);
+            oos.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
