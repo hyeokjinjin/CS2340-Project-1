@@ -1,4 +1,4 @@
-package com.example.project1;
+package com.example.project1.fragments;
 
 import android.os.Bundle;
 
@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.project1.R;
 import com.example.project1.databinding.FragmentTodoBinding;
 
 import android.widget.AdapterView;

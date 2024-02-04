@@ -1,9 +1,8 @@
-package com.example.project1;
+package com.example.project1.popupWindows;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -13,8 +12,9 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TimePicker;
 import android.widget.Toast;
+
+import com.example.project1.R;
 
 import java.util.ArrayList;
 import java.util.Calendar;

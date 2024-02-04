@@ -1,4 +1,4 @@
-package com.example.project1;
+package com.example.project1.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,6 +13,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.project1.helperClasses.ListDataClass;
+import com.example.project1.R;
+import com.example.project1.helperClasses.RecyclerViewAdapter;
+import com.example.project1.helperClasses.RecyclerViewInterface;
+import com.example.project1.popupWindows.classesPop;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.File;

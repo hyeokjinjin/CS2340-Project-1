@@ -6,13 +6,15 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.FrameLayout;
 
 import com.example.project1.databinding.ActivityMainBinding;
+import com.example.project1.fragments.assignmentsFragment;
+import com.example.project1.fragments.classFragment;
+import com.example.project1.fragments.examFragment;
+import com.example.project1.fragments.todoFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
