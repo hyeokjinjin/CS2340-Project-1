@@ -36,6 +36,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.header.setText(dataList.get(position).getHeading());
         holder.subheader1.setText(dataList.get(position).getSubhead1());
         holder.subheader2.setText(dataList.get(position).getSubhead2());
+        holder.subheader3.setText(dataList.get(position).getSubhead3());
     }
 
     @Override
@@ -46,13 +47,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView header;
-        TextView subheader1, subheader2;
+        TextView subheader1, subheader2, subheader3;
         public MyViewHolder(@NonNull View itemView, RecyclerViewInterface recyclerViewInterface) {
             super(itemView);
 
             header = itemView.findViewById(R.id.heading);
             subheader1 = itemView.findViewById(R.id.subhead1);
             subheader2 = itemView.findViewById(R.id.subhead2);
+            subheader3 = itemView.findViewById(R.id.subhead3);
 
 
             itemView.setOnLongClickListener(new View.OnLongClickListener() {

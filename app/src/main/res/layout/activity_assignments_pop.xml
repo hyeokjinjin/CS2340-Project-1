@@ -30,24 +30,11 @@
         android:hint="@string/assignment_class"
         android:inputType="text"
         android:text=""
-        app:layout_constraintBottom_toTopOf="@+id/assignmentsDateInput"
+        app:layout_constraintBottom_toTopOf="@+id/assignmentsNameInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.80" />
-
-    <EditText
-        android:id="@+id/assignmentsDateInput"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:ems="15"
-        android:hint="@string/assignment_due_date"
-        android:inputType="date"
-        android:text=""
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/assignmentsNameInput"
@@ -60,8 +47,25 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/assignmentsDateInput"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/assignmentsDateInput"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:ems="18"
+        android:text="@string/assignment_due_date"
+        android:textColor="@color/slateShadow"
+        android:background="@color/navBarColor"
+        android:textStyle="bold"
+        style="?android:spinnerStyle"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/assignmentsNameInput"
+        android:onClick="onAssignmentDatePicker"
+        app:layout_constraintVertical_bias=".2"/>
 
     <Button
         android:id="@+id/assignments_close"
@@ -73,6 +77,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/assignmentsNameInput" />
+        app:layout_constraintTop_toBottomOf="@+id/assignmentsDateInput" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

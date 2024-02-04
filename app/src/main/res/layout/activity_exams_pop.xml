@@ -29,24 +29,12 @@
         android:hint="@string/exam_name"
         android:inputType="text"
         android:text=""
-        app:layout_constraintVertical_bias=".8"
-        app:layout_constraintBottom_toTopOf="@+id/examDateTimeInput"
+        app:layout_constraintBottom_toTopOf="@+id/examLocationInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.8" />
 
-    <EditText
-        android:id="@+id/examDateTimeInput"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:ems="15"
-        android:hint="@string/exam_date_time"
-        android:inputType="text"
-        android:text=""
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/examLocationInput"
@@ -56,11 +44,43 @@
         android:hint="@string/exam_location"
         android:inputType="text"
         android:text=""
-        app:layout_constraintVertical_bias=".2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/examDateTimeInput" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.45" />
+
+    <EditText
+        android:id="@+id/examTimeInput"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:ems="15"
+        android:hint="@string/exam_time"
+        android:inputType="text"
+        android:text=""
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/examLocationInput"
+        app:layout_constraintVertical_bias="0.18" />
+
+    <Button
+        android:id="@+id/examDateInput"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:ems="18"
+        android:text="@string/exam_date"
+        android:textColor="@color/slateShadow"
+        android:background="@color/navBarColor"
+        android:textStyle="bold"
+        style="?android:spinnerStyle"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/examTimeInput"
+        app:layout_constraintVertical_bias="0.25"
+        android:onClick="onExamDatePicker" />
 
     <Button
         android:id="@+id/exam_close"
@@ -72,6 +92,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/examLocationInput" />
+        app:layout_constraintTop_toBottomOf="@+id/examDateInput" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

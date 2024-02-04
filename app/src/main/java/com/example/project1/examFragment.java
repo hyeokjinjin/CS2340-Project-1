@@ -59,7 +59,7 @@ public class examFragment extends Fragment implements RecyclerViewInterface {
         if (requestCode == 3) {
             if (resultCode == Activity.RESULT_OK) {
                 inputArray = data.getStringArrayListExtra("Exams Array");
-                rowData.add(new ListDataClass(inputArray.get(0), inputArray.get(1), inputArray.get(2)));
+                rowData.add(new ListDataClass(inputArray.get(0), inputArray.get(1), inputArray.get(2), inputArray.get(3)));
                 adapter.notifyItemInserted(adapter.getItemCount());
                 writeItem();
             }
