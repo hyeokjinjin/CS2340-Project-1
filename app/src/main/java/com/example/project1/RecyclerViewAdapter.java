@@ -1,0 +1,73 @@
+package com.example.project1;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
+
+    private final RecyclerViewInterface recyclerViewInterface;
+    Context context;
+    ArrayList<ListDataClass> dataList;
+
+    public RecyclerViewAdapter(Context context, ArrayList<ListDataClass> dataList, RecyclerViewInterface recyclerViewInterface) {
+        this.context = context;
+        this.dataList = dataList;
+        this.recyclerViewInterface = recyclerViewInterface;
+    }
+
+    @NonNull
+    @Override
+    public RecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View view = inflater.inflate(R.layout.recycler_view_row, parent, false);
+        return new RecyclerViewAdapter.MyViewHolder(view, recyclerViewInterface);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull RecyclerViewAdapter.MyViewHolder holder, int position) {
+        holder.header.setText(dataList.get(position).getHeading());
+        holder.subheader1.setText(dataList.get(position).getSubhead1());
+        holder.subheader2.setText(dataList.get(position).getSubhead2());
+    }
+
+    @Override
+    public int getItemCount() {
+        return dataList.size();
+    }
+
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
+
+        TextView header;
+        TextView subheader1, subheader2;
+        public MyViewHolder(@NonNull View itemView, RecyclerViewInterface recyclerViewInterface) {
+            super(itemView);
+
+            header = itemView.findViewById(R.id.heading);
+            subheader1 = itemView.findViewById(R.id.subhead1);
+            subheader2 = itemView.findViewById(R.id.subhead2);
+
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    if (recyclerViewInterface != null) {
+                        int pos = getAdapterPosition();
+
+                        if (pos != RecyclerView.NO_POSITION) {
+                            recyclerViewInterface.onItemLongClick(pos);
+                        }
+                    }
+                    return true;
+                }
+            });
+        }
+    }
+}

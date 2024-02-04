@@ -12,85 +12,66 @@
         android:id="@+id/examsName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/exam_name"
-        android:textSize="32sp"
+        android:text="@string/add_exam"
+        android:textAlignment="center"
+        android:textSize="28sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/examsTime"
+        app:layout_constraintBottom_toTopOf="@+id/examNameInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.32" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/examsNameInput"
+        android:id="@+id/examNameInput"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:ems="12"
+        android:layout_height="60dp"
+        android:ems="15"
+        android:hint="@string/exam_name"
         android:inputType="text"
         android:text=""
-        android:autofillHints="Exam Name"
-        app:layout_constraintEnd_toEndOf="@+id/examsName"
-        app:layout_constraintStart_toStartOf="@+id/examsName"
-        app:layout_constraintTop_toBottomOf="@+id/examsName" />
+        app:layout_constraintVertical_bias=".8"
+        app:layout_constraintBottom_toTopOf="@+id/examDateTimeInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/examsTime"
+    <EditText
+        android:id="@+id/examDateTimeInput"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/exam_date_time"
-        android:textSize="32sp"
-        android:textStyle="bold"
+        android:layout_height="60dp"
+        android:ems="15"
+        android:hint="@string/exam_date_time"
+        android:inputType="text"
+        android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.32" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/examsTimeInput"
+        android:id="@+id/examLocationInput"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:ems="12"
+        android:layout_height="60dp"
+        android:ems="15"
+        android:hint="@string/exam_location"
         android:inputType="text"
         android:text=""
-        android:autofillHints="Exam Date &amp; Time"
-        app:layout_constraintEnd_toEndOf="@+id/examsTime"
-        app:layout_constraintStart_toStartOf="@+id/examsTime"
-        app:layout_constraintTop_toBottomOf="@+id/examsTime" />
-
-    <TextView
-        android:id="@+id/examsLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/exam_location"
-        android:textSize="32sp"
-        android:textStyle="bold"
+        app:layout_constraintVertical_bias=".2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/examsTime"
-        app:layout_constraintVertical_bias="0.32" />
-
-    <EditText
-        android:id="@+id/examsLocationInput"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:ems="12"
-        android:inputType="text"
-        android:text=""
-        android:autofillHints="Exam Location"
-        app:layout_constraintEnd_toEndOf="@+id/examsLocation"
-        app:layout_constraintStart_toStartOf="@+id/examsLocation"
-        app:layout_constraintTop_toBottomOf="@+id/examsLocation" />
+        app:layout_constraintTop_toBottomOf="@+id/examDateTimeInput" />
 
     <Button
-        android:id="@+id/exams_close"
+        android:id="@+id/exam_close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_save"
+        android:textColor="@color/slateShadow"
+        android:backgroundTint="@color/cloudWisp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/examsLocationInput" />
+        app:layout_constraintTop_toBottomOf="@+id/examLocationInput" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

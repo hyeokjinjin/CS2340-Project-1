@@ -9,4 +9,10 @@
     <string name="exam_name">Exam Name</string>
     <string name="exam_date_time"><![CDATA[Exam Date & Time]]></string>
     <string name="exam_location">Exam Location</string>
+    <string name="assignment_name">Assignment Name</string>
+    <string name="assignment_due_date">Assignment Due Date</string>
+    <string name="assignment_class">Assignment Class</string>
+    <string name="new_assignment">Create New Assignment</string>
+    <string name="add_class">Add Class</string>
+    <string name="add_exam">Add Exam</string>
 </resources>

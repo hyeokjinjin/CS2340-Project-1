@@ -18,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.apache.commons.io.FileUtils;
 
@@ -124,9 +125,13 @@ public class todoFragment extends Fragment {
     public void onAddItem(View v) {
         EditText etNewItem = binding.etAddItem;
         String itemText = etNewItem.getText().toString();
-        itemsAdapter.add(itemText);
-        etNewItem.setText("");
-        writeItems(); // adds to stored data
+        if (itemText.trim().equals("")) {
+            Toast.makeText(getActivity().getBaseContext(), "Task cannot be empty", Toast.LENGTH_SHORT).show();
+        } else {
+            itemsAdapter.add(itemText);
+            etNewItem.setText("");
+            writeItems(); // adds to stored data
+        }
     }
 
 }

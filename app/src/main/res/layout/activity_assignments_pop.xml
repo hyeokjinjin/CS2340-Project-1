@@ -9,25 +9,70 @@
     tools:context=".assignmentsPop">
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/newAssignment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Assignments"
-        android:textSize="20sp"
+        android:text="@string/new_assignment"
+        android:textColor="@color/slateShadow"
+        android:textSize="28sp"
         android:textStyle="bold"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/assignmentsClassInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/assignmentsClassInput"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:ems="15"
+        android:hint="@string/assignment_class"
+        android:inputType="text"
+        android:text=""
+        app:layout_constraintBottom_toTopOf="@+id/assignmentsDateInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.80" />
+
+    <EditText
+        android:id="@+id/assignmentsDateInput"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:ems="15"
+        android:hint="@string/assignment_due_date"
+        android:inputType="date"
+        android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <EditText
+        android:id="@+id/assignmentsNameInput"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:ems="15"
+        android:hint="@string/assignment_name"
+        android:inputType="text"
+        android:text=""
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/assignmentsDateInput"
+        app:layout_constraintVertical_bias="0.2" />
+
     <Button
         android:id="@+id/assignments_close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Close"
+        android:backgroundTint="@color/cloudWisp"
+        android:textColor="@color/slateShadow"
+        android:text="@string/button_save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/assignmentsNameInput" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
