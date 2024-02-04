@@ -12,7 +12,7 @@
         android:id="@+id/examsName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/class_name"
+        android:text="@string/exam_name"
         android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/examsTime"
@@ -28,7 +28,7 @@
         android:ems="12"
         android:inputType="text"
         android:text=""
-        android:autofillHints="Class Name"
+        android:autofillHints="Exam Name"
         app:layout_constraintEnd_toEndOf="@+id/examsName"
         app:layout_constraintStart_toStartOf="@+id/examsName"
         app:layout_constraintTop_toBottomOf="@+id/examsName" />
@@ -37,7 +37,7 @@
         android:id="@+id/examsTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/class_time"
+        android:text="@string/exam_date_time"
         android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -53,7 +53,7 @@
         android:ems="12"
         android:inputType="text"
         android:text=""
-        android:autofillHints="Class Time"
+        android:autofillHints="Exam Date &amp; Time"
         app:layout_constraintEnd_toEndOf="@+id/examsTime"
         app:layout_constraintStart_toStartOf="@+id/examsTime"
         app:layout_constraintTop_toBottomOf="@+id/examsTime" />
@@ -62,7 +62,7 @@
         android:id="@+id/examsLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/class_instructor"
+        android:text="@string/exam_location"
         android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -78,7 +78,7 @@
         android:ems="12"
         android:inputType="text"
         android:text=""
-        android:autofillHints="Class Instructor"
+        android:autofillHints="Exam Location"
         app:layout_constraintEnd_toEndOf="@+id/examsLocation"
         app:layout_constraintStart_toStartOf="@+id/examsLocation"
         app:layout_constraintTop_toBottomOf="@+id/examsLocation" />
@@ -90,7 +90,6 @@
         android:text="@string/button_save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/examsLocationInput" />
 
