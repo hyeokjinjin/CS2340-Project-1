@@ -17,7 +17,7 @@ public class classesPop extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_classes_pop);
 
-        btn_close = (Button) findViewById(R.id.classes_close);
+        btn_close = (Button) findViewById(R.id.exams_close);
         btn_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
