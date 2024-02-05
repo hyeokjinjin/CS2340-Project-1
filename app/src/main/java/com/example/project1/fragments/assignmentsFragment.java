@@ -64,7 +64,7 @@ public class assignmentsFragment extends Fragment implements RecyclerViewInterfa
             @Override
             // Code that creates a new Activity (pop-up window) when button is clicked.
             public void onClick(View view) {
-                Dialog dialog = dialogHelper(view, false);
+                Dialog dialog = dialogHelper(view, false, 0);
                 dialog.show();
             }
         });
@@ -141,7 +141,7 @@ public class assignmentsFragment extends Fragment implements RecyclerViewInterfa
     // Code that will edit the assignment on click.
     @Override
     public void onItemClick(int position, View view) {
-        Dialog dialog = dialogHelper(view, true);
+        Dialog dialog = dialogHelper(view, true, position);
         dialog.show();
 
     }
@@ -208,12 +208,12 @@ public class assignmentsFragment extends Fragment implements RecyclerViewInterfa
 
 
 
-    private Dialog dialogHelper(View view, boolean change) {
+    private Dialog dialogHelper(View view, boolean change, int position) {
         Dialog dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.activity_assignments_pop);
         initDatePicker();
 
-        viewInitializer(dialog, change);
+        viewInitializer(dialog, change, position);
 
         dateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -225,9 +225,9 @@ public class assignmentsFragment extends Fragment implements RecyclerViewInterfa
         btn_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nameString = assignmentName.getText().toString();
-                String dateString = dateButton.getText().toString();
-                String classString = assignmentClass.getText().toString();
+                String nameString = assignmentName.getText().toString().trim();
+                String dateString = dateButton.getText().toString().trim();
+                String classString = assignmentClass.getText().toString().trim();
 
                 if (nameString.trim().equals("")) {
                     Toast.makeText(getActivity(), "Assignment name cannot be empty", Toast.LENGTH_SHORT).show();
@@ -237,8 +237,14 @@ public class assignmentsFragment extends Fragment implements RecyclerViewInterfa
                     Toast.makeText(getActivity(), "Assignment's class cannot be empty", Toast.LENGTH_SHORT).show();
                 } else {
                     String[] date = dateString.split("/");
-                    rowData.add(new ListDataClass(nameString, dateString, classString, Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2])));
-                    adapter.notifyItemInserted(adapter.getItemCount());
+                    if (change) {
+                        rowData.set(position, new ListDataClass(nameString, dateString, classString, Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2])));
+                        adapter.notifyItemChanged(position);
+                    } else {
+                        rowData.add(new ListDataClass(nameString, dateString, classString, Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2])));
+                        adapter.notifyItemInserted(adapter.getItemCount());
+                    }
+                    writeItem();
                     dialog.dismiss();
                 }
 
@@ -247,7 +253,7 @@ public class assignmentsFragment extends Fragment implements RecyclerViewInterfa
         return dialog;
     }
 
-    private void viewInitializer(Dialog dialog, boolean change) {
+    private void viewInitializer(Dialog dialog, boolean change, int position) {
         assignmentName = dialog.findViewById(R.id.assignmentsNameInput);
         assignmentClass = dialog.findViewById(R.id.assignmentsClassInput);
         dateButton = dialog.findViewById(R.id.assignmentsDateInput);
@@ -257,6 +263,9 @@ public class assignmentsFragment extends Fragment implements RecyclerViewInterfa
             TextView title = dialog.findViewById(R.id.newAssignment);
             title.setText("Edit Assignment");
             btn_close.setText("Update");
+            assignmentName.setText(rowData.get(position).getHeading());
+            assignmentClass.setText(rowData.get(position).getSubhead2());
+            dateButton.setText(rowData.get(position).getSubhead1());
         }
     }
 
