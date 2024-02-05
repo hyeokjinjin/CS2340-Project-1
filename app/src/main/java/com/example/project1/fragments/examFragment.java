@@ -30,7 +30,6 @@ import java.util.ArrayList;
 
 public class examFragment extends Fragment implements RecyclerViewInterface {
 
-    private ArrayList<String> inputArray;
     private ArrayList<ListDataClass> rowData = new ArrayList<>();
     private RecyclerViewAdapter adapter;
 
@@ -39,15 +38,18 @@ public class examFragment extends Fragment implements RecyclerViewInterface {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_exam, container, false);
 
+        // Code for RecyclerView (List with the cards that have exam information).
         RecyclerView recyclerView = view.findViewById(R.id.exams_recycler_view);
         readItems();
         adapter = new RecyclerViewAdapter(getActivity(), rowData, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.exams_fab);
+        // Code for the Floating Action Button that allows user to add more exams.
+        FloatingActionButton fab = view.findViewById(R.id.exams_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
+            // Code that creates a new Activity (pop-up window) when button is clicked.
             public void onClick(View view) {
                 Intent i = new Intent(getActivity().getApplicationContext(), examsPop.class);
                 startActivityForResult(i,3);
@@ -57,13 +59,14 @@ public class examFragment extends Fragment implements RecyclerViewInterface {
         return view;
     }
 
+    // Code that will create a new item on the RecyclerView (exam list) when Activity (pop-up window) is finished.
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 3) {
             if (resultCode == Activity.RESULT_OK) {
-                inputArray = data.getStringArrayListExtra("Exams Array");
+                ArrayList<String> inputArray = data.getStringArrayListExtra("Exams Array");
                 rowData.add(new ListDataClass(inputArray.get(0), inputArray.get(1), inputArray.get(2), inputArray.get(3)));
                 adapter.notifyItemInserted(adapter.getItemCount());
                 writeItem();
@@ -71,6 +74,7 @@ public class examFragment extends Fragment implements RecyclerViewInterface {
         }
     }
 
+    // Code that will remove the exam on long click.
     @Override
     public void onItemLongClick(int position) {
         rowData.remove(position);
@@ -78,10 +82,11 @@ public class examFragment extends Fragment implements RecyclerViewInterface {
         adapter.notifyItemRemoved(position);
     }
 
+    // Code that will read the cached items from file and add to RecyclerView when fragment opened.
     private void readItems() {
         File filesDir = requireContext().getFilesDir();
-        File assignmentsFile = new File(filesDir, "exams.bin");
-        try (FileInputStream fis = new FileInputStream(assignmentsFile);
+        File examsFile = new File(filesDir, "exams.bin");
+        try (FileInputStream fis = new FileInputStream(examsFile);
              ObjectInputStream ois = new ObjectInputStream(fis)) {
             rowData = (ArrayList<ListDataClass>) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
@@ -89,10 +94,11 @@ public class examFragment extends Fragment implements RecyclerViewInterface {
         }
     }
 
+    // Code that will write the items to a file to be cached.
     private void writeItem() {
         File filesDir = requireContext().getFilesDir();
-        File assignmentsFile = new File(filesDir, "exams.bin");
-        try (FileOutputStream fos = new FileOutputStream(assignmentsFile);
+        File examsFile = new File(filesDir, "exams.bin");
+        try (FileOutputStream fos = new FileOutputStream(examsFile);
              ObjectOutputStream oos = new ObjectOutputStream(fos)){
             oos.writeObject(rowData);
             oos.flush();

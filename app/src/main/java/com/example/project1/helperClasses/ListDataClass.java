@@ -3,10 +3,7 @@ package com.example.project1.helperClasses;
 import java.io.Serializable;
 
 public class ListDataClass implements Serializable {
-    private String heading;
-    private String subhead1;
-    private String subhead2;
-    private String subhead3;
+    private String heading, subhead1, subhead2, subhead3;
 
     public ListDataClass(String heading, String subhead1, String subhead2) {
         this(heading, subhead1, subhead2, "");

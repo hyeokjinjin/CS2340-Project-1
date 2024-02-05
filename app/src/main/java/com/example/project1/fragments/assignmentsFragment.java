@@ -28,12 +28,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 
 public class assignmentsFragment extends Fragment implements RecyclerViewInterface {
 
-    private ArrayList<String> inputArray;
     private ArrayList<ListDataClass> rowData;
     private RecyclerViewAdapter adapter;
 
@@ -42,21 +40,25 @@ public class assignmentsFragment extends Fragment implements RecyclerViewInterfa
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_assignments, container, false);
 
+        // Code for RecyclerView (List with the cards that have assignments information).
         RecyclerView recyclerView = view.findViewById(R.id.assignments_recycler_view);
         readItems();
         adapter = new RecyclerViewAdapter(getActivity(), rowData, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.assignments_fab);
+        // Code for the Floating Action Button that allows user to add more assignments.
+        FloatingActionButton fab = view.findViewById(R.id.assignments_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
+            // Code that creates a new Activity (pop-up window) when button is clicked.
             public void onClick(View view) {
                 Intent i = new Intent(getActivity().getApplicationContext(), assignmentsPop.class);
                 startActivityForResult(i, 2);
             }
         });
 
+        // Code for button that will sort assignments by class.
         Button sortClassButton = view.findViewById(R.id.sortClass);
         sortClassButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +69,7 @@ public class assignmentsFragment extends Fragment implements RecyclerViewInterfa
             }
         });
 
+        // Code for button that will sort assignments by date.
         Button sortDateButton = view.findViewById(R.id.sortDate);
         sortDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,13 +83,14 @@ public class assignmentsFragment extends Fragment implements RecyclerViewInterfa
         return view;
     }
 
+    // Code that will create a new item on the RecyclerView (assignment list) when Activity (pop-up window) is finished.
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 2) {
             if (resultCode == Activity.RESULT_OK) {
-                inputArray = data.getStringArrayListExtra("Assignments Array");
+                ArrayList<String> inputArray = data.getStringArrayListExtra("Assignments Array");
                 rowData.add(new ListDataClass(inputArray.get(0), inputArray.get(1), inputArray.get(2)));
                 adapter.notifyItemInserted(adapter.getItemCount());
                 writeItem();
@@ -94,6 +98,7 @@ public class assignmentsFragment extends Fragment implements RecyclerViewInterfa
         }
     }
 
+    // Code that will remove the assignment on long click.
     @Override
     public void onItemLongClick(int position) {
         rowData.remove(position);
@@ -101,6 +106,7 @@ public class assignmentsFragment extends Fragment implements RecyclerViewInterfa
         adapter.notifyItemRemoved(position);
     }
 
+    // Code that will read the cached items from file and add to RecyclerView when fragment opened.
     private void readItems() {
         File filesDir = requireContext().getFilesDir();
         File assignmentsFile = new File(filesDir, "assignments.bin");
@@ -112,6 +118,7 @@ public class assignmentsFragment extends Fragment implements RecyclerViewInterfa
         }
     }
 
+    // Code that will write the items to a file to be cached.
     private void writeItem() {
         File filesDir = requireContext().getFilesDir();
         File assignmentsFile = new File(filesDir, "assignments.bin");
@@ -124,6 +131,7 @@ public class assignmentsFragment extends Fragment implements RecyclerViewInterfa
         }
     }
 
+    // Method that will sort the arrayList by class.
     private ArrayList<ListDataClass> classSort(ArrayList<ListDataClass> list) {
         list.sort(new Comparator<ListDataClass>() {
             @Override

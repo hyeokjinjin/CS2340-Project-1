@@ -30,7 +30,6 @@ import java.util.ArrayList;
 
 public class classFragment extends Fragment implements RecyclerViewInterface {
 
-    private ArrayList<String> inputArray;
     private ArrayList<ListDataClass> rowData = new ArrayList<>();
     private RecyclerViewAdapter adapter;
 
@@ -39,15 +38,18 @@ public class classFragment extends Fragment implements RecyclerViewInterface {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_class, container, false);
 
+        // Code for RecyclerView (List with the cards that have class information).
         RecyclerView recyclerView = view.findViewById(R.id.classes_recycler_view);
         readItems();
         adapter = new RecyclerViewAdapter(getActivity(), rowData, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.classes_fab);
+        // Code for the Floating Action Button that allows user to add more classes.
+        FloatingActionButton fab = view.findViewById(R.id.classes_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
+            // Code that creates a new Activity (pop-up window) when button is clicked.
             public void onClick(View view) {
                 Intent i = new Intent(getActivity().getApplicationContext(), classesPop.class);
                 startActivityForResult(i, 1);
@@ -57,13 +59,14 @@ public class classFragment extends Fragment implements RecyclerViewInterface {
         return view;
     }
 
+    // Code that will create a new item on the RecyclerView (class list) when Activity (pop-up window) is finished.
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 1) {
             if (resultCode == Activity.RESULT_OK) {
-                inputArray = data.getStringArrayListExtra("Classes Array");
+                ArrayList<String> inputArray = data.getStringArrayListExtra("Classes Array");
                 rowData.add(new ListDataClass(inputArray.get(0), inputArray.get(1), inputArray.get(2)));
                 adapter.notifyItemInserted(adapter.getItemCount());
                 writeItem();
@@ -72,6 +75,7 @@ public class classFragment extends Fragment implements RecyclerViewInterface {
 
     }
 
+    // Code that will remove the class on long click.
     @Override
     public void onItemLongClick(int position) {
         rowData.remove(position);
@@ -79,10 +83,11 @@ public class classFragment extends Fragment implements RecyclerViewInterface {
         adapter.notifyItemRemoved(position);
     }
 
+    // Code that will read the cached items from file and add to RecyclerView when fragment opened.
     private void readItems() {
         File filesDir = requireContext().getFilesDir();
-        File assignmentsFile = new File(filesDir, "classes.bin");
-        try (FileInputStream fis = new FileInputStream(assignmentsFile);
+        File classesFile = new File(filesDir, "classes.bin");
+        try (FileInputStream fis = new FileInputStream(classesFile);
              ObjectInputStream ois = new ObjectInputStream(fis)) {
             rowData = (ArrayList<ListDataClass>) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
@@ -90,10 +95,11 @@ public class classFragment extends Fragment implements RecyclerViewInterface {
         }
     }
 
+    // Code that will write the items to a file to be cached.
     private void writeItem() {
         File filesDir = requireContext().getFilesDir();
-        File assignmentsFile = new File(filesDir, "classes.bin");
-        try (FileOutputStream fos = new FileOutputStream(assignmentsFile);
+        File classesFile = new File(filesDir, "classes.bin");
+        try (FileOutputStream fos = new FileOutputStream(classesFile);
              ObjectOutputStream oos = new ObjectOutputStream(fos)){
             oos.writeObject(rowData);
             oos.flush();
