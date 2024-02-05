@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/ToDo">
+
+    <fragment
+        android:id="@+id/ToDo"
+        android:name="com.example.project1.todoFragment"
+        android:label="fragment_todo"
+        tools:layout="@layout/fragment_todo">
+
+        <action
+            android:id="@+id/action_todo_to_todo1"
+            app:destination="@id/ToDo1" />
+        <action
+            android:id="@+id/action_todo_to_todo2"
+            app:destination="@id/ToDo2" />
+        <action
+            android:id="@+id/action_todo_to_todo3"
+            app:destination="@id/ToDo3" />
+    </fragment>
+    <fragment
+        android:id="@+id/ToDo1"
+        android:name="com.example.project1.todoFragment1"
+        android:label="fragment_to_do_1"
+        tools:layout="@layout/fragment_todo_1">
+
+    </fragment>
+    <fragment
+        android:id="@+id/ToDo2"
+        android:name="com.example.project1.fragments.todoFragment2"
+        android:label="fragment_todo2"
+        tools:layout="@layout/fragment_todo_2">
+
+        <!--        <action-->
+        <!--            android:id="@+id/action_SecondFragment_to_FirstFragment"-->
+        <!--            app:destination="@id/FirstFragment" />-->
+    </fragment>
+    <fragment
+        android:id="@+id/ToDo3"
+        android:name="com.example.project1.fragments.todoFragment3"
+        android:label="fragment_todo3"
+        tools:layout="@layout/fragment_todo_3">
+
+        <!--        <action-->
+        <!--            android:id="@+id/action_SecondFragment_to_FirstFragment"-->
+        <!--            app:destination="@id/FirstFragment" />-->
+    </fragment>
+</navigation>

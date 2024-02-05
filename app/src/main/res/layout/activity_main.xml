@@ -9,7 +9,21 @@
     android:orientation="vertical"
     android:background="@color/appBackground"
     tools:context=".MainActivity">
-    
+
+<!--    toolbar test-->
+<!--    <com.google.android.material.appbar.AppBarLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:fitsSystemWindows="true">-->
+
+<!--        <com.google.android.material.appbar.MaterialToolbar-->
+<!--            android:id="@+id/toolbar"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="?attr/actionBarSize" />-->
+
+<!--    </com.google.android.material.appbar.AppBarLayout>-->
+
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -26,4 +40,5 @@
         app:itemActiveIndicatorStyle="@color/cloudWisp"
         app:backgroundTint="@color/navBarColor" />
 
+<!--    <include layout="@layout/content_main" />-->
 </LinearLayout>

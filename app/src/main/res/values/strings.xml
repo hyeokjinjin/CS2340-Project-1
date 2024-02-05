@@ -19,4 +19,8 @@
     <string name="sort_by">Sort By:</string>
     <string name="classes">Classes</string>
     <string name="due_date">Due Date</string>
+    <string name="to_do_1">To Do 1</string>
+    <string name="to_do_2">To Do 2</string>
+    <string name="to_do_3">To Do 3</string>
+
 </resources>
