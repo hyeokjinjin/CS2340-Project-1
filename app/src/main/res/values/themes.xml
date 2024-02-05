@@ -6,9 +6,7 @@
         <item name="colorPrimary">@color/appBackground</item>
         <item name="colorPrimaryVariant">@color/navBarColor</item>
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <item name="colorSecondary">@color/cloudWisp</item>
-        <item name="colorSecondaryVariant">@color/cloudWisp</item>
-        <item name="colorOnSecondary">@color/cloudWisp</item>
+        <item name="colorOnPrimary">@color/slateShadow</item>
     </style>
 
     <style name="PopMe" parent="Theme.Material3.DayNight.NoActionBar">

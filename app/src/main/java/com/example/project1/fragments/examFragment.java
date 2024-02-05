@@ -82,6 +82,11 @@ public class examFragment extends Fragment implements RecyclerViewInterface {
         adapter.notifyItemRemoved(position);
     }
 
+    @Override
+    public void onItemClick(int position, View view) {
+
+    }
+
     // Code that will read the cached items from file and add to RecyclerView when fragment opened.
     private void readItems() {
         File filesDir = requireContext().getFilesDir();

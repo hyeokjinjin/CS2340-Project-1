@@ -1,15 +1,21 @@
 package com.example.project1.helperClasses;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project1.R;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -48,6 +54,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
+        View view;
         TextView header;
         TextView subheader1, subheader2, subheader3;
         public MyViewHolder(@NonNull View itemView, RecyclerViewInterface recyclerViewInterface) {
@@ -57,6 +64,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             subheader1 = itemView.findViewById(R.id.subhead1);
             subheader2 = itemView.findViewById(R.id.subhead2);
             subheader3 = itemView.findViewById(R.id.subhead3);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (recyclerViewInterface != null) {
+                        int pos = getAdapterPosition();
+
+                        if (pos != RecyclerView.NO_POSITION) {
+                            recyclerViewInterface.onItemClick(pos, view);
+                        }
+                    }
+                }
+            });
 
 
             itemView.setOnLongClickListener(new View.OnLongClickListener() {

@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/navBarColor"
-    tools:context=".popupWindows.assignmentsPop">
+    android:background="@color/navBarColor">
+<!--    tools:context=".popupWindows.assignmentsPop"-->
 
     <TextView
         android:id="@+id/newAssignment"
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:text="@string/new_assignment"
         android:textColor="@color/slateShadow"
-        android:textSize="28sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/assignmentsClassInput"
@@ -26,7 +26,8 @@
         android:id="@+id/assignmentsClassInput"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:ems="15"
+        android:ems="10"
+        android:textSize="18sp"
         android:hint="@string/assignment_class"
         android:inputType="text"
         android:text=""
@@ -40,7 +41,8 @@
         android:id="@+id/assignmentsNameInput"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:ems="15"
+        android:ems="10"
+        android:textSize="18sp"
         android:hint="@string/assignment_name"
         android:inputType="text"
         android:text=""
@@ -53,10 +55,11 @@
         android:id="@+id/assignmentsDateInput"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:ems="18"
+        android:ems="12"
+        android:textSize="18sp"
         android:text="@string/assignment_due_date"
         android:textColor="@color/slateShadow"
-        android:background="@color/navBarColor"
+        android:backgroundTint="@color/navBarColor"
         android:textStyle="bold"
         style="?android:spinnerStyle"
         android:padding="10dp"
@@ -64,7 +67,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/assignmentsNameInput"
-        android:onClick="onAssignmentDatePicker"
         app:layout_constraintVertical_bias=".2"/>
 
     <Button

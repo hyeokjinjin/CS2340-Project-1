@@ -19,7 +19,6 @@
             android:textSize="18sp"
             android:padding="14dp"
             android:textColor="@color/slateShadow"
-            android:background="@color/appBackground"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
