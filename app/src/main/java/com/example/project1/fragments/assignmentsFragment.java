@@ -74,7 +74,7 @@ public class assignmentsFragment extends Fragment implements RecyclerViewInterfa
         sortDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //rowData = dateSort(rowData);
+                rowData = dateSort(rowData);
                 adapter.notifyDataSetChanged();
                 writeItem();
             }
@@ -91,7 +91,9 @@ public class assignmentsFragment extends Fragment implements RecyclerViewInterfa
         if (requestCode == 2) {
             if (resultCode == Activity.RESULT_OK) {
                 ArrayList<String> inputArray = data.getStringArrayListExtra("Assignments Array");
-                rowData.add(new ListDataClass(inputArray.get(0), inputArray.get(1), inputArray.get(2)));
+                String[] date = inputArray.get(1).split("/");
+                rowData.add(new ListDataClass(inputArray.get(0), inputArray.get(1), inputArray.get(2),
+                        Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2])));
                 adapter.notifyItemInserted(adapter.getItemCount());
                 writeItem();
              }
@@ -137,6 +139,23 @@ public class assignmentsFragment extends Fragment implements RecyclerViewInterfa
             @Override
             public int compare(ListDataClass o1, ListDataClass o2) {
                 return o1.getSubhead2().compareToIgnoreCase(o2.getSubhead2());
+            }
+        });
+        return list;
+    }
+
+    // Method that will sort the arrayList by date.
+    private ArrayList<ListDataClass> dateSort(ArrayList<ListDataClass> list) {
+        list.sort(new Comparator<ListDataClass>() {
+            @Override
+            public int compare(ListDataClass o1, ListDataClass o2) {
+                if ((o1.getYear().compareTo(o2.getYear()) == 0) && (o1.getMonth().compareTo(o2.getMonth()) == 0)) {
+                    return o1.getDay().compareTo(o2.getDay());
+                } else if (o1.getYear().compareTo(o2.getYear()) == 0) {
+                    return o1.getMonth().compareTo(o2.getMonth());
+                } else {
+                    return o1.getYear().compareTo(o2.getYear());
+                }
             }
         });
         return list;

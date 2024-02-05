@@ -21,7 +21,7 @@ import java.util.Calendar;
 
 public class assignmentsPop extends Activity {
 
-    private ArrayList<String> textInput = new ArrayList<>();
+    private ArrayList<String> textInput;
     private EditText assignmentName, assignmentClass;
     private DatePickerDialog datePickerDialog;
     private Button dateButton;
@@ -29,6 +29,7 @@ public class assignmentsPop extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        textInput = new ArrayList<>();
         setContentView(R.layout.activity_assignments_pop);
         initDatePicker();
 
@@ -101,47 +102,7 @@ public class assignmentsPop extends Activity {
     }
 
     private String makeDateString(int dayOfMonth, int month, int year) {
-        return getMonthFormat(month) + " " + dayOfMonth + " " + year;
-    }
-
-    private String getMonthFormat(int month) {
-        if (month == 1) {
-            return "JAN";
-        }
-        if (month == 2) {
-            return "FEB";
-        }
-        if (month == 3) {
-            return "MAR";
-        }
-        if (month == 4) {
-            return "APR";
-        }
-        if (month == 5) {
-            return "MAY";
-        }
-        if (month == 6) {
-            return "JUN";
-        }
-        if (month == 7) {
-            return "JUL";
-        }
-        if (month == 8) {
-            return "AUG";
-        }
-        if (month == 9) {
-            return "SEP";
-        }
-        if (month == 10) {
-            return "AUG";
-        }
-        if (month == 11) {
-            return "NOV";
-        }
-        if (month == 12) {
-            return "DEC";
-        }
-        return "JAN";
+        return month + "/" + dayOfMonth + "/" + year;
     }
 
     public void onAssignmentDatePicker(View view) {
