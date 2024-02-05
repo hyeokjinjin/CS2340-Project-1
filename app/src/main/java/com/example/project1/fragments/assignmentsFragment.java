@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.project1.helperClasses.ListDataClass;
 import com.example.project1.R;
@@ -27,6 +28,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class assignmentsFragment extends Fragment implements RecyclerViewInterface {
 
@@ -51,6 +54,26 @@ public class assignmentsFragment extends Fragment implements RecyclerViewInterfa
             public void onClick(View view) {
                 Intent i = new Intent(getActivity().getApplicationContext(), assignmentsPop.class);
                 startActivityForResult(i, 2);
+            }
+        });
+
+        Button sortClassButton = view.findViewById(R.id.sortClass);
+        sortClassButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rowData = classSort(rowData);
+                adapter.notifyDataSetChanged();
+                writeItem();
+            }
+        });
+
+        Button sortDateButton = view.findViewById(R.id.sortDate);
+        sortDateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //rowData = dateSort(rowData);
+                adapter.notifyDataSetChanged();
+                writeItem();
             }
         });
 
@@ -99,6 +122,16 @@ public class assignmentsFragment extends Fragment implements RecyclerViewInterfa
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private ArrayList<ListDataClass> classSort(ArrayList<ListDataClass> list) {
+        list.sort(new Comparator<ListDataClass>() {
+            @Override
+            public int compare(ListDataClass o1, ListDataClass o2) {
+                return o1.getSubhead2().compareToIgnoreCase(o2.getSubhead2());
+            }
+        });
+        return list;
     }
 
 }

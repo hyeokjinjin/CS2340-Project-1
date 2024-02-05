@@ -16,4 +16,7 @@
     <string name="new_assignment">Create New Assignment</string>
     <string name="add_class">Add Class</string>
     <string name="add_exam">Add Exam</string>
+    <string name="sort_by">Sort By:</string>
+    <string name="classes">Classes</string>
+    <string name="due_date">Due Date</string>
 </resources>
