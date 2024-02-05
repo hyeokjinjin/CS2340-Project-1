@@ -1,14 +1,28 @@
 package com.example.project1;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import com.example.project1.databinding.FragmentTodoBinding;
 
@@ -18,6 +32,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.apache.commons.io.FileUtils;
 
@@ -35,98 +50,62 @@ public class todoFragment extends Fragment {
     private ArrayAdapter<String> itemsAdapter;
     private ListView lvItems;
     private FragmentTodoBinding binding;
+    private AppBarConfiguration appBarConfiguration;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentTodoBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        // sets up list view
-        lvItems = view.findViewById(R.id.lv_to_do);
-        items = new ArrayList<>();
-        readItems(); // read cached items
-        itemsAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, items);
-        lvItems.setAdapter(itemsAdapter);
-
-        // Call listener for long tap and hold for removing item
-        setupListViewListener();
-
-        // Set up the click listener for the "Add" button
-        binding.buttonAddItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onAddItem(v);
-            }
-        });
-
+       // NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+//        NavController navController = NavHostFragment.findNavController(this);
+//        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
 
         return view;
     }
-//        View view = inflater.inflate(R.layout.fragment_todo, container, false);
-//
-//        binding = FragmentTodoBinding.inflate(getLayoutInflater());
-//        setContentView(binding.getRoot());
-//        //sets up list view
-//        lvItems = (ListView) findViewById(R.id.lv_to_do);
-//        items = new ArrayList<String>();
-//        readItems(); //read cached items
-//        itemsAdapter = new ArrayAdapter<String>(this,
-//                android.R.layout.simple_list_item_1, items);
-//        lvItems.setAdapter(itemsAdapter);
-//
-//        //Call listener for long tap and hold for removing item
-//        setupListViewListener();
-//
-//        return view;
-//    }
 
-    //Next two blocks of code cache the data by reading and writing to/from memory
-// Next two blocks of code cache the data by reading and writing to/from memory
-    private void readItems() {
-        File filesDir = requireContext().getFilesDir();
-        File todoFile = new File(filesDir, "todo.txt");
-        try {
-            items = new ArrayList<>(FileUtils.readLines(todoFile));
-        } catch (IOException e) {
-            items = new ArrayList<>();
-        }
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view,savedInstanceState);
+
+        // Set up the click listener for the "Add" button
+        binding.btnTodo1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new todoFragment1();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frameLayout, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+        binding.btnTodo2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new todoFragment2();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frameLayout, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+        binding.btnTodo3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new todoFragment3();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frameLayout, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
     }
-
-    private void writeItems() {
-        File filesDir = requireContext().getFilesDir();
-        File todoFile = new File(filesDir, "todo.txt");
-        try {
-            FileUtils.writeLines(todoFile, items);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // Attaches a long click listener to the listview with purpose of removing
-    private void setupListViewListener() {
-        lvItems.setOnItemLongClickListener(
-                new AdapterView.OnItemLongClickListener() {
-                    @Override
-                    public boolean onItemLongClick(AdapterView<?> adapter,
-                                                   View item, int pos, long id) {
-                        // Remove the item within array at position
-                        items.remove(pos);
-                        // Refresh the adapter
-                        itemsAdapter.notifyDataSetChanged();
-                        writeItems(); //removes from stored data
-                        // Return true consumes the long click event (marks it handled)
-                        return true;
-                    }
-                });
-    }
-
-    //Updates listview to add item
-    public void onAddItem(View v) {
-        EditText etNewItem = binding.etAddItem;
-        String itemText = etNewItem.getText().toString();
-        itemsAdapter.add(itemText);
-        etNewItem.setText("");
-        writeItems(); // adds to stored data
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
 }
