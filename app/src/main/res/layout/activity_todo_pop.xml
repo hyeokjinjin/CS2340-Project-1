@@ -12,7 +12,7 @@
         android:id="@+id/newTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/add_class"
+        android:text="@string/new_task"
         android:textAlignment="center"
         android:textColor="@color/slateShadow"
         android:textSize="20sp"
