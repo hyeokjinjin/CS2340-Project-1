@@ -1,6 +1,7 @@
 package com.example.project1.fragments;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -12,6 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.project1.helperClasses.ListDataClass;
 import com.example.project1.R;
@@ -32,6 +37,8 @@ public class classFragment extends Fragment implements RecyclerViewInterface {
 
     private ArrayList<ListDataClass> rowData = new ArrayList<>();
     private RecyclerViewAdapter adapter;
+    private EditText className, classTime, classInstructor;
+    private Button btn_close;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,29 +58,17 @@ public class classFragment extends Fragment implements RecyclerViewInterface {
             @Override
             // Code that creates a new Activity (pop-up window) when button is clicked.
             public void onClick(View view) {
-                Intent i = new Intent(getActivity().getApplicationContext(), classesPop.class);
-                startActivityForResult(i, 1);
+//                Intent i = new Intent(getActivity().getApplicationContext(), classesPop.class);
+//                startActivityForResult(i, 1);
+                Dialog dialog = dialogHelper(view, false, 0);
+                dialog.show();
             }
         });
 
         return view;
     }
 
-    // Code that will create a new item on the RecyclerView (class list) when Activity (pop-up window) is finished.
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == 1) {
-            if (resultCode == Activity.RESULT_OK) {
-                ArrayList<String> inputArray = data.getStringArrayListExtra("Classes Array");
-                rowData.add(new ListDataClass(inputArray.get(0), inputArray.get(1), inputArray.get(2)));
-                adapter.notifyItemInserted(adapter.getItemCount());
-                writeItem();
-            }
-        }
-
-    }
 
     // Code that will remove the class on long click.
     @Override
@@ -85,7 +80,8 @@ public class classFragment extends Fragment implements RecyclerViewInterface {
 
     @Override
     public void onItemClick(int position, View view) {
-
+        Dialog dialog = dialogHelper(view, true, position);
+        dialog.show();
     }
 
     // Code that will read the cached items from file and add to RecyclerView when fragment opened.
@@ -110,6 +106,58 @@ public class classFragment extends Fragment implements RecyclerViewInterface {
             oos.flush();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private Dialog dialogHelper(View view, boolean change, int position) {
+        Dialog dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.activity_classes_pop);
+
+        viewInitializer(dialog, change, position);
+
+        btn_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String nameString = className.getText().toString().trim();
+                String timeString = classTime.getText().toString().trim();
+                String instructorString = classInstructor.getText().toString().trim();
+
+                if (nameString.trim().equals("")) {
+                    Toast.makeText(getActivity(), "Class name cannot be empty", Toast.LENGTH_SHORT).show();
+                } else if (timeString.trim().equals("")) {
+                    Toast.makeText(getActivity(), "Class time cannot be empty", Toast.LENGTH_SHORT).show();
+                } else if (instructorString.trim().equals("")) {
+                    Toast.makeText(getActivity(), "Class instructor cannot be empty", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (change) {
+                        rowData.set(position, new ListDataClass(nameString, timeString, instructorString));
+                        adapter.notifyItemChanged(position);
+                    } else {
+                        rowData.add(new ListDataClass(nameString, timeString, instructorString));
+                        adapter.notifyItemInserted(adapter.getItemCount());
+                    }
+                    writeItem();
+                    dialog.dismiss();
+                }
+
+            }
+        });
+        return dialog;
+    }
+
+    private void viewInitializer(Dialog dialog, boolean change, int position) {
+        className = dialog.findViewById(R.id.classNameInput);
+        classTime = dialog.findViewById(R.id.classTimeInput);
+        classInstructor = dialog.findViewById(R.id.classInstructorInput);
+        btn_close = dialog.findViewById(R.id.class_close);
+
+        if (change) {
+            TextView title = dialog.findViewById(R.id.newClass);
+            title.setText("Edit Class");
+            btn_close.setText("Update");
+            className.setText(rowData.get(position).getHeading());
+            classTime.setText(rowData.get(position).getSubhead2());
+            classInstructor.setText(rowData.get(position).getSubhead1());
         }
     }
 

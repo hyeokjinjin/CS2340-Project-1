@@ -27,10 +27,10 @@ public class classesPop extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_classes_pop);
 
-        Button btn_close = (Button) findViewById(R.id.class_close);
-        className = (EditText) findViewById(R.id.classNameInput);
-        classTime = (EditText) findViewById(R.id.classTimeInput);
-        classInstructor = (EditText) findViewById(R.id.classInstructorInput);
+        Button btn_close = findViewById(R.id.class_close);
+        className = findViewById(R.id.classNameInput);
+        classTime = findViewById(R.id.classTimeInput);
+        classInstructor = findViewById(R.id.classInstructorInput);
 
         btn_close.setOnClickListener(new View.OnClickListener() {
             @Override

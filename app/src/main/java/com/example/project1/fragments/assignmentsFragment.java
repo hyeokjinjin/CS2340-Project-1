@@ -143,7 +143,6 @@ public class assignmentsFragment extends Fragment implements RecyclerViewInterfa
     public void onItemClick(int position, View view) {
         Dialog dialog = dialogHelper(view, true, position);
         dialog.show();
-
     }
 
 
