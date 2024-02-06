@@ -5,11 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/navBarColor"
-    tools:context=".popupWindows.examsPop">
+    android:background="@color/navBarColor">
 
     <TextView
-        android:id="@+id/examsName"
+        android:id="@+id/newExam"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/add_exam"

@@ -1,11 +1,8 @@
 package com.example.project1.fragments;
 
-import android.app.Activity;
 import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,7 +19,6 @@ import com.example.project1.helperClasses.ListDataClass;
 import com.example.project1.R;
 import com.example.project1.helperClasses.RecyclerViewAdapter;
 import com.example.project1.helperClasses.RecyclerViewInterface;
-import com.example.project1.popupWindows.classesPop;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.File;
@@ -58,8 +54,6 @@ public class classFragment extends Fragment implements RecyclerViewInterface {
             @Override
             // Code that creates a new Activity (pop-up window) when button is clicked.
             public void onClick(View view) {
-//                Intent i = new Intent(getActivity().getApplicationContext(), classesPop.class);
-//                startActivityForResult(i, 1);
                 Dialog dialog = dialogHelper(view, false, 0);
                 dialog.show();
             }
@@ -156,8 +150,8 @@ public class classFragment extends Fragment implements RecyclerViewInterface {
             title.setText("Edit Class");
             btn_close.setText("Update");
             className.setText(rowData.get(position).getHeading());
-            classTime.setText(rowData.get(position).getSubhead2());
-            classInstructor.setText(rowData.get(position).getSubhead1());
+            classTime.setText(rowData.get(position).getSubhead1());
+            classInstructor.setText(rowData.get(position).getSubhead2());
         }
     }
 
