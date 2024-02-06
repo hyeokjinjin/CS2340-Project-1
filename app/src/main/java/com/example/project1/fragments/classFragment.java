@@ -31,7 +31,7 @@ import java.util.ArrayList;
 
 public class classFragment extends Fragment implements RecyclerViewInterface {
 
-    private ArrayList<ListDataClass> rowData = new ArrayList<>();
+    private ArrayList<ListDataClass> rowData;
     private RecyclerViewAdapter adapter;
     private EditText className, classTime, classInstructor;
     private Button btn_close;
@@ -64,6 +64,7 @@ public class classFragment extends Fragment implements RecyclerViewInterface {
 
 
 
+
     // Code that will remove the class on long click.
     @Override
     public void onItemLongClick(int position) {
@@ -72,11 +73,15 @@ public class classFragment extends Fragment implements RecyclerViewInterface {
         adapter.notifyItemRemoved(position);
     }
 
+    // Code that will edit the assignment on click.
     @Override
     public void onItemClick(int position, View view) {
         Dialog dialog = dialogHelper(view, true, position);
         dialog.show();
     }
+
+
+
 
     // Code that will read the cached items from file and add to RecyclerView when fragment opened.
     private void readItems() {
@@ -103,6 +108,10 @@ public class classFragment extends Fragment implements RecyclerViewInterface {
         }
     }
 
+
+
+
+    // Helper method that creates the dialog box and listens for the input from user
     private Dialog dialogHelper(View view, boolean change, int position) {
         Dialog dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.activity_classes_pop);
@@ -139,6 +148,7 @@ public class classFragment extends Fragment implements RecyclerViewInterface {
         return dialog;
     }
 
+    // Initializes the dialog box and added all the views needed
     private void viewInitializer(Dialog dialog, boolean change, int position) {
         className = dialog.findViewById(R.id.classNameInput);
         classTime = dialog.findViewById(R.id.classTimeInput);

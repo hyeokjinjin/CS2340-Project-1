@@ -69,20 +69,8 @@ public class examFragment extends Fragment implements RecyclerViewInterface {
         return view;
     }
 
-//    // Code that will create a new item on the RecyclerView (exam list) when Activity (pop-up window) is finished.
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        if (requestCode == 3) {
-//            if (resultCode == Activity.RESULT_OK) {
-//                ArrayList<String> inputArray = data.getStringArrayListExtra("Exams Array");
-//                rowData.add(new ListDataClass(inputArray.get(0), inputArray.get(1), inputArray.get(2), inputArray.get(3)));
-//                adapter.notifyItemInserted(adapter.getItemCount());
-//                writeItem();
-//            }
-//        }
-//    }
+
+
 
     // Code that will remove the exam on long click.
     @Override
@@ -92,11 +80,15 @@ public class examFragment extends Fragment implements RecyclerViewInterface {
         adapter.notifyItemRemoved(position);
     }
 
+    // Code that will edit the assignment on click.
     @Override
     public void onItemClick(int position, View view) {
         Dialog dialog = dialogHelper(view, true, position);
         dialog.show();
     }
+
+
+
 
     // Code that will read the cached items from file and add to RecyclerView when fragment opened.
     private void readItems() {
@@ -123,6 +115,10 @@ public class examFragment extends Fragment implements RecyclerViewInterface {
         }
     }
 
+
+
+
+    // Code that will allow the date picker widget to work when dialog box opens
     private void initDatePicker() {
         DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -143,14 +139,20 @@ public class examFragment extends Fragment implements RecyclerViewInterface {
         datePickerDialog = new DatePickerDialog(getActivity(), style, dateSetListener, year, month, day);
     }
 
+    // Helper method to create string for date
     private String makeDateString(int dayOfMonth, int month, int year) {
         return month +  "/" + dayOfMonth + "/" + year;
     }
 
+    // Method that shows the date picker
     public void onExamDatePicker(View view) {
         datePickerDialog.show();
     }
 
+
+
+
+    // Helper method that creates the dialog box and listens for the input from user
     private Dialog dialogHelper(View view, boolean change, int position) {
         Dialog dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.activity_exams_pop);
@@ -198,6 +200,7 @@ public class examFragment extends Fragment implements RecyclerViewInterface {
         return dialog;
     }
 
+    // Initializes the dialog box and added all the views needed
     private void viewInitializer(Dialog dialog, boolean change, int position) {
         examName = dialog.findViewById(R.id.examNameInput);
         examLocation = dialog.findViewById(R.id.examLocationInput);

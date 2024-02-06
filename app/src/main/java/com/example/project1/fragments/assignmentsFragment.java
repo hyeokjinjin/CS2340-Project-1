@@ -65,8 +65,6 @@ public class assignmentsFragment extends Fragment implements RecyclerViewInterfa
             }
         });
 
-
-
         // Code for button that will sort assignments by class.
         Button sortClassButton = view.findViewById(R.id.sortClass);
         sortClassButton.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +86,6 @@ public class assignmentsFragment extends Fragment implements RecyclerViewInterfa
                 writeItem();
             }
         });
-
         return view;
     }
 
@@ -172,6 +169,7 @@ public class assignmentsFragment extends Fragment implements RecyclerViewInterfa
 
 
 
+    // Code that will allow the date picker widget to work when dialog box opens
     private void initDatePicker() {
         DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -192,10 +190,12 @@ public class assignmentsFragment extends Fragment implements RecyclerViewInterfa
         datePickerDialog = new DatePickerDialog(getActivity(), style, dateSetListener, year, month, day);
     }
 
+    // Helper method to create string for date
     private String makeDateString(int dayOfMonth, int month, int year) {
         return month + "/" + dayOfMonth + "/" + year;
     }
 
+    // Method that shows the date picker
     public void onAssignmentDatePicker(View view) {
         datePickerDialog.show();
     }
@@ -203,6 +203,7 @@ public class assignmentsFragment extends Fragment implements RecyclerViewInterfa
 
 
 
+    // Helper method that creates the dialog box and listens for the input from user
     private Dialog dialogHelper(View view, boolean change, int position) {
         Dialog dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.activity_assignments_pop);
@@ -248,6 +249,7 @@ public class assignmentsFragment extends Fragment implements RecyclerViewInterfa
         return dialog;
     }
 
+    // Initializes the dialog box and added all the views needed
     private void viewInitializer(Dialog dialog, boolean change, int position) {
         assignmentName = dialog.findViewById(R.id.assignmentsNameInput);
         assignmentClass = dialog.findViewById(R.id.assignmentsClassInput);

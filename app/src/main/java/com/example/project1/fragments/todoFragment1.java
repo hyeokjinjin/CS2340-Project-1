@@ -44,6 +44,7 @@ public class todoFragment1 extends Fragment implements RecyclerViewInterface {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_todo_1, container, false);
 
+        // Code to set up how the recycler view for the list.
         RecyclerView recyclerView = view.findViewById(R.id.list1_recyclerview);
         readItems();
         adapter = new RecyclerViewAdapter(getActivity(), rowData, this);
@@ -62,6 +63,8 @@ public class todoFragment1 extends Fragment implements RecyclerViewInterface {
         return view;
     }
 
+
+
     // Code that will remove the task on long click.
     @Override
     public void onItemLongClick(int position) {
@@ -70,11 +73,14 @@ public class todoFragment1 extends Fragment implements RecyclerViewInterface {
         adapter.notifyItemRemoved(position);
     }
 
+    // Code that will edit the task on click.
     @Override
     public void onItemClick(int position, View view) {
         Dialog dialog = dialogHelper(view, true, position);
         dialog.show();
     }
+
+
 
     // Code that will read the cached items from file and add to RecyclerView when fragment opened.
     private void readItems() {
@@ -101,6 +107,9 @@ public class todoFragment1 extends Fragment implements RecyclerViewInterface {
         }
     }
 
+
+
+    // Helper method that creates the dialog box and listens for the input from user
     private Dialog dialogHelper(View view, boolean change, int position) {
         Dialog dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.activity_todo_pop);
@@ -130,6 +139,8 @@ public class todoFragment1 extends Fragment implements RecyclerViewInterface {
         return dialog;
     }
 
+
+    // Initializes the dialog box and added all the views needed
     private void viewInitializer(Dialog dialog, boolean change, int position) {
         taskTitle = dialog.findViewById(R.id.taskInput);
         btn_close = dialog.findViewById(R.id.todo_close);
