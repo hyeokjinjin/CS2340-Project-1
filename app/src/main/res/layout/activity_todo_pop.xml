@@ -9,73 +9,45 @@
     android:background="@color/navBarColor" >
 
     <TextView
-        android:id="@+id/newClass"
+        android:id="@+id/newTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/add_class"
+        android:textAlignment="center"
         android:textColor="@color/slateShadow"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/classNameInput"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/classNameInput"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:ems="10"
-        android:textSize="18sp"
-        android:hint="@string/class_name"
-        android:inputType="text"
-        android:text=""
-        app:layout_constraintBottom_toTopOf="@+id/classTimeInput"
+        app:layout_constraintBottom_toTopOf="@+id/taskInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias=".80"/>
+        app:layout_constraintVertical_bias="0.90" />
 
     <EditText
-        android:id="@+id/classTimeInput"
+        android:id="@+id/taskInput"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:ems="10"
-        android:textSize="18sp"
-        android:hint="@string/class_time"
+        android:hint="@string/new_task"
         android:inputType="text"
         android:text=""
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/classInstructorInput"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:ems="10"
-        android:textSize="18sp"
-        android:hint="@string/class_instructor"
-        android:inputType="text"
-        android:text=""
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/classTimeInput"
-        app:layout_constraintVertical_bias=".2"/>
-
     <Button
-        android:id="@+id/class_close"
+        android:id="@+id/todo_close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/cloudWisp"
-        android:textColor="@color/slateShadow"
         android:text="@string/button_save"
+        android:textColor="@color/slateShadow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/classInstructorInput" />
+        app:layout_constraintTop_toBottomOf="@+id/taskInput"
+        app:layout_constraintVertical_bias="0.10" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

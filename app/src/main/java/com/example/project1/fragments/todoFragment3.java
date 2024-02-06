@@ -1,108 +1,147 @@
 package com.example.project1.fragments;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project1.R;
 import com.example.project1.databinding.FragmentTodo3Binding;
 import com.example.project1.databinding.FragmentTodoBinding;
+import com.example.project1.helperClasses.ListDataClass;
+import com.example.project1.helperClasses.RecyclerViewAdapter;
+import com.example.project1.helperClasses.RecyclerViewInterface;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 
-public class todoFragment3 extends Fragment {
-    private ArrayList<String> items;
-    private ArrayAdapter<String> itemsAdapter;
-    private ListView lvItems;
-    private FragmentTodo3Binding binding;
+public class todoFragment3 extends Fragment implements RecyclerViewInterface {
+    private ArrayList<ListDataClass> rowData = new ArrayList<>();
+    private RecyclerViewAdapter adapter;
+    private EditText taskTitle;
+    private Button btn_close;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentTodo3Binding.inflate(inflater, container, false);
-        View view = binding.getRoot();
+        View view = inflater.inflate(R.layout.fragment_todo_3, container, false);
 
-        // sets up list view
-        lvItems = view.findViewById(R.id.lv_to_do_3);
-        items = new ArrayList<>();
-        readItems(); // read cached items
-        itemsAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, items);
-        lvItems.setAdapter(itemsAdapter);
+        RecyclerView recyclerView = view.findViewById(R.id.list3_recyclerview);
+        readItems();
+        adapter = new RecyclerViewAdapter(getActivity(), rowData, this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        // Call listener for long tap and hold for removing item
-        setupListViewListener();
-
-        // Set up the click listener for the "Add" button
-        binding.buttonAddItem3.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fab = view.findViewById(R.id.list3fab);
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onAddItem(v);
+                Dialog dialog = dialogHelper(view, false, 0);
+                dialog.show();
             }
         });
-
 
         return view;
     }
 
+    // Code that will remove the task on long click.
+    @Override
+    public void onItemLongClick(int position) {
+        rowData.remove(position);
+        writeItem();
+        adapter.notifyItemRemoved(position);
+    }
 
-    //Next two blocks of code cache the data by reading and writing to/from memory
-// Next two blocks of code cache the data by reading and writing to/from memory
+    @Override
+    public void onItemClick(int position, View view) {
+        Dialog dialog = dialogHelper(view, true, position);
+        dialog.show();
+    }
+
+    // Code that will read the cached items from file and add to RecyclerView when fragment opened.
     private void readItems() {
         File filesDir = requireContext().getFilesDir();
-        File todoFile = new File(filesDir, "todo3.txt");
-        try {
-            items = new ArrayList<>(FileUtils.readLines(todoFile));
-        } catch (IOException e) {
-            items = new ArrayList<>();
+        File todoListThreeFile = new File(filesDir, "todoList3.bin");
+        try (FileInputStream fis = new FileInputStream(todoListThreeFile);
+             ObjectInputStream ois = new ObjectInputStream(fis)) {
+            rowData = (ArrayList<ListDataClass>) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            rowData = new ArrayList<>();
         }
     }
 
-    private void writeItems() {
+    // Code that will write the items to a file to be cached.
+    private void writeItem() {
         File filesDir = requireContext().getFilesDir();
-        File todoFile = new File(filesDir, "todo3.txt");
-        try {
-            FileUtils.writeLines(todoFile, items);
+        File todoListThreeFile = new File(filesDir, "todoList3.bin");
+        try (FileOutputStream fos = new FileOutputStream(todoListThreeFile);
+             ObjectOutputStream oos = new ObjectOutputStream(fos)){
+            oos.writeObject(rowData);
+            oos.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    // Attaches a long click listener to the listview with purpose of removing
-    private void setupListViewListener() {
-        lvItems.setOnItemLongClickListener(
-                new AdapterView.OnItemLongClickListener() {
-                    @Override
-                    public boolean onItemLongClick(AdapterView<?> adapter,
-                                                   View item, int pos, long id) {
-                        // Remove the item within array at position
-                        items.remove(pos);
-                        // Refresh the adapter
-                        itemsAdapter.notifyDataSetChanged();
-                        writeItems(); //removes from stored data
-                        // Return true consumes the long click event (marks it handled)
-                        return true;
+    private Dialog dialogHelper(View view, boolean change, int position) {
+        Dialog dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.activity_todo_pop);
+
+        viewInitializer(dialog, change, position);
+        btn_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String taskString = taskTitle.getText().toString().trim();
+
+                if (taskString.trim().equals("")) {
+                    Toast.makeText(getActivity(), "Task cannot be empty", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (change) {
+                        rowData.set(position, new ListDataClass(taskString, "", ""));
+                        adapter.notifyItemChanged(position);
+                    } else {
+                        rowData.add(new ListDataClass(taskString, "", ""));
+                        adapter.notifyItemInserted(adapter.getItemCount());
                     }
-                });
+                    writeItem();
+                    dialog.dismiss();
+                }
+
+            }
+        });
+        return dialog;
     }
 
-    //Updates listview to add item
-    public void onAddItem(View v) {
-        EditText etNewItem = binding.etAddItem3;
-        String itemText = etNewItem.getText().toString();
-        itemsAdapter.add(itemText);
-        etNewItem.setText("");
-        writeItems(); // adds to stored data
+    private void viewInitializer(Dialog dialog, boolean change, int position) {
+        taskTitle = dialog.findViewById(R.id.taskInput);
+        btn_close = dialog.findViewById(R.id.todo_close);
+
+        if (change) {
+            TextView title = dialog.findViewById(R.id.newTask);
+            title.setText("Edit Task");
+            btn_close.setText("Update");
+            taskTitle.setText(rowData.get(position).getHeading());
+        }
     }
 
 }

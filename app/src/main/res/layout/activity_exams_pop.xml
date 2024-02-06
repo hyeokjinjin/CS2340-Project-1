@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="20dp"
     android:background="@color/navBarColor">
 
     <TextView
@@ -12,9 +13,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/add_exam"
-        android:textAlignment="center"
-        android:textSize="28sp"
+        android:textColor="@color/slateShadow"
+        android:textSize="20sp"
         android:textStyle="bold"
+        android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/examNameInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,7 +26,8 @@
         android:id="@+id/examNameInput"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:ems="15"
+        android:ems="10"
+        android:textSize="18sp"
         android:hint="@string/exam_name"
         android:inputType="text"
         android:text=""
@@ -32,14 +35,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.8" />
+        app:layout_constraintVertical_bias="0.80" />
 
 
     <EditText
         android:id="@+id/examLocationInput"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:ems="15"
+        android:ems="10"
+        android:textSize="18sp"
         android:hint="@string/exam_location"
         android:inputType="text"
         android:text=""
@@ -53,7 +57,8 @@
         android:id="@+id/examTimeInput"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:ems="15"
+        android:ems="10"
+        android:textSize="18sp"
         android:hint="@string/exam_time"
         android:inputType="text"
         android:text=""
@@ -67,10 +72,11 @@
         android:id="@+id/examDateInput"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:ems="18"
+        android:ems="12"
+        android:textSize="18sp"
         android:text="@string/exam_date"
         android:textColor="@color/slateShadow"
-        android:background="@color/navBarColor"
+        android:backgroundTint="@color/navBarColor"
         android:textStyle="bold"
         style="?android:spinnerStyle"
         android:padding="10dp"
@@ -78,8 +84,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/examTimeInput"
-        app:layout_constraintVertical_bias="0.25"
-        android:onClick="onExamDatePicker" />
+        app:layout_constraintVertical_bias="0.25" />
+<!--        android:onClick="onExamDatePicker"-->
 
     <Button
         android:id="@+id/exam_close"
